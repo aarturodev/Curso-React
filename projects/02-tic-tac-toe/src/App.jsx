@@ -1,11 +1,11 @@
-import { useState } from "react";
 import confetti from "canvas-confetti";
+import { useState } from "react";
 
-import { Scuare } from "./components/Square";
-import { TURNS } from "./constants";
-import { checkEndGame, checkWinnerFrom} from "./logic/board";
-import { WinnerModal } from "./components/Winner";
+import { Board } from "./components/Board";
 import { Turns } from "./components/Turns";
+import { WinnerModal } from "./components/Winner";
+import { TURNS } from "./constants";
+import { checkEndGame, checkWinnerFrom } from "./logic/board";
 
 export default function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -40,18 +40,10 @@ export default function App() {
 
   return (
     <main className="board">
-      <h1>TIC TAC TOE</h1>
-      <button onClick={resetGame}> Reiniciar</button>
+      <h1>Tic Tac Toe</h1>
+      <button onClick={resetGame}> Restart</button>
 
-      <section className="game">
-        {board.map((square, index) => {
-          return (
-            <Scuare key={index} index={index} updateBoard={updateBoard}>
-              {square}
-            </Scuare>
-          );
-        })}
-      </section>
+      <Board boardGame={board} updateBoard={updateBoard}/>
 
       <Turns turn={turn} />
 

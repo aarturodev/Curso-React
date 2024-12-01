@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #030238e7;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -36,7 +36,7 @@ body {
 }
 
 .board h1 {
-  color: #eee;
+  color: #e24d4dfc;
   margin-bottom: 16px;
 }
 
@@ -44,7 +44,7 @@ body {
   padding: 8px 12px;
   margin: 25px;
   background: transparent;
-  border: 2px solid #eee;
+  border: 2px solid #eeeeee4e;
   color: #eee;
   width: 100px;
   border-radius: 5px;
@@ -54,14 +54,13 @@ body {
 }
 
 .board button:hover {
-  background: #eee;
-  color: #222;
+  background: #eeeeee5b;
+  color: #ffffff;
 }
 
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
 }
 
 .turn {
@@ -83,7 +82,7 @@ body {
 
 .square.is-selected {
   color: #fff;
-  background: rgb(11, 209, 31);
+  background: rgba(243, 245, 243, 0.311);
 }
 
 .winner {
@@ -94,14 +93,14 @@ body {
   left: 0;
   display: grid;
   place-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(8, 8, 8, 0.411);
 }
 
 .winner .text {
-  background: #111;
+  background: #03123eef;
   height: 300px;
   width: 320px;
-  border: 2px solid #eee;
+  border: 2px solid #ffffff72;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -112,7 +111,7 @@ body {
 
 .winner .win {
   margin: 0 auto;
-  padding: 4px;
+  padding: 16px;
   width: fit-content;
   border: 2px solid #eee;
   border-radius: 10px;
@@ -123,8 +122,7 @@ body {
 .square {
   width: 100px;
   height: 100px;
-  border: 2px solid #eee;
-  border-radius: 5px;
+  border: 1px solid #eeeeee74;
   display: flex;
   align-items: center;
   justify-content: center;
