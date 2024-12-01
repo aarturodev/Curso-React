@@ -6,6 +6,7 @@ import { Turns } from "./components/Turns";
 import { WinnerModal } from "./components/Winner";
 import { TURNS } from "./constants";
 import { checkEndGame, checkWinnerFrom } from "./logic/board";
+import { saveGame, resetGame } from "./logic/storage/storage";
 
 export default function App() {
   const [board, setBoard] = useState(() => {
@@ -26,8 +27,7 @@ export default function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.x);
     setWinner(null);
-    window.localStorage.removeItem("board")
-    window.localStorage.removeItem("turn")
+    resetGame();
   };
 
   const updateBoard = (index) => {
@@ -40,8 +40,10 @@ export default function App() {
     setTurn(newTurn);
 
     // guardamos el tablero y el turno de la partida
-    window.localStorage.setItem("board", JSON.stringify(newBoard));
-    window.localStorage.setItem("turn", newTurn);
+    saveGame({
+      newBoard: newBoard,
+      newTurn: newTurn,
+    });
 
     const newWinner = checkWinnerFrom(newBoard);
     if (newWinner) {
