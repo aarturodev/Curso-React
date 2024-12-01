@@ -8,8 +8,16 @@ import { TURNS } from "./constants";
 import { checkEndGame, checkWinnerFrom } from "./logic/board";
 
 export default function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [turn, setTurn] = useState(TURNS.x);
+  const [board, setBoard] = useState(() => {
+    const boardLocalStorage = window.localStorage.getItem("board");
+    return boardLocalStorage
+      ? JSON.parse(boardLocalStorage)
+      : Array(9).fill(null);
+  });
+  const [turn, setTurn] = useState(() => {
+    const turnLocalStorage = window.localStorage.getItem("turn");
+    return turnLocalStorage ?? TURNS.x;
+  });
 
   // null significa que no tenemos ganador, False que hay un empate
   const [winner, setWinner] = useState(null);
@@ -18,6 +26,8 @@ export default function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.x);
     setWinner(null);
+    window.localStorage.removeItem("board")
+    window.localStorage.removeItem("turn")
   };
 
   const updateBoard = (index) => {
@@ -29,10 +39,14 @@ export default function App() {
     const newTurn = turn === TURNS.x ? TURNS.o : TURNS.x;
     setTurn(newTurn);
 
+    // guardamos el tablero y el turno de la partida
+    window.localStorage.setItem("board", JSON.stringify(newBoard));
+    window.localStorage.setItem("turn", newTurn);
+
     const newWinner = checkWinnerFrom(newBoard);
     if (newWinner) {
       confetti();
-      setWinner(newWinner)
+      setWinner(newWinner);
     } else if (checkEndGame(newBoard)) {
       setWinner(false);
     }
@@ -43,7 +57,7 @@ export default function App() {
       <h1>Tic Tac Toe</h1>
       <button onClick={resetGame}> Restart</button>
 
-      <Board boardGame={board} updateBoard={updateBoard}/>
+      <Board boardGame={board} updateBoard={updateBoard} />
 
       <Turns turn={turn} />
 
